@@ -1,0 +1,156 @@
+-- public.demanda definition
+
+-- Drop table
+
+-- DROP TABLE public.demanda;
+
+CREATE TABLE public.demanda (
+	id int8 DEFAULT nextval('hibernate_sequence'::regclass) NOT NULL,
+	ativo bool NOT NULL,
+	data_criacao timestamp NOT NULL,
+	assuntodemanda varchar(255) NULL,
+	bairro varchar(255) NULL,
+	complemento varchar(255) NULL,
+	datahoraaberturademanda timestamp NOT NULL,
+	datahoraocorrencia timestamp NOT NULL,
+	descricao text NULL,
+	enderecoproximidade bool NOT NULL,
+	latitude varchar(255) NULL,
+	logradouro varchar(255) NOT NULL,
+	longitude varchar(255) NULL,
+	numero varchar(255) NULL,
+	pontoreferencia varchar(255) NULL,
+	protocolo varchar(255) NULL,
+	situacao int4 NULL,
+	demanda_id int8 NULL,
+	fiscalizado_id int8 NULL,
+	grupodemanda_id int8 NOT NULL,
+	pessoageradora_id int8 NULL,
+	regional_id int8 NULL,
+	os_id int8 NULL,
+	requeracompanhamento bool NULL,
+	trataranonimamente bool NULL,
+	plano_id int8 NULL,
+	usuarioalteracao varchar(255) NULL,
+	autoverificacao int8 NULL,
+	demandareferencia int8 NULL,
+	situacaoanterior int4 NULL,
+	operacao_id int8 NULL,
+	unidadeoperacional_id int8 NULL,
+	os_direta bool NULL,
+	arearisco varchar(255) NULL,
+	protocoloacompanhamento varchar NULL,
+	datafiscalizacao timestamp NULL,
+	duracaodemanda int4 NULL,
+	bairro_geo varchar NULL,
+	pontos float4 NULL,
+	datalimite timestamp NULL,
+	id_integracao int8 NULL,
+	protocolo_integracao varchar(255) NULL,
+	orgaosolicitante varchar NULL,
+	datageracaoos timestamp NULL,
+	informacaoinsuficiente bool NULL,
+	datacancelamento timestamp NULL,
+	usuariocancelamento_id int8 NULL,
+	gerenteconclusao_id int8 NULL,
+	dataconclusaogerente timestamp NULL,
+	dataconclusaofiscal timestamp NULL,
+	dataexecucao timestamp NULL,
+	demandafiscalizada bool NULL,
+	demandaconstatada bool NULL,
+	dataatribuicaoequipe timestamp NULL,
+	rota_id int8 NULL,
+	emanalise bool NULL,
+	dataresposta timestamp NULL,
+	autoreferencia int8 NULL,
+	justificativapontuacao text NULL,
+	retornojustificativa text NULL,
+	bloqueada bool NULL,
+	compendencia bool NULL,
+	emanalisegeo bool NULL,
+	observacaodiplan text NULL,
+	bloqueio_id int8 NULL,
+	cep varchar(255) NULL,
+	datadesbloqueio timestamp NULL,
+	justificativadesbloqueio varchar(255) NULL,
+	usuariodesbloqueio_id int8 NULL,
+	urgencia bool NULL,
+	dataurgencia timestamp NULL,
+	observacaoouvidoria text NULL,
+	dataarquivamento timestamp NULL,
+	eidoso bool NULL,
+	orientacoesretorno text NULL,
+	cnae_id int8 NULL,
+	dataevento timestamp NULL,
+	evento bool NULL,
+	notapriorizacao text NULL,
+	tipopriorizacao varchar(255) NULL,
+	prioridade_demanda_id int8 NULL,
+	comunicacao_encerrada bool NULL,
+	area_risco_quiz bool NULL,
+	data_bloqueio_criar_auto_demanda timestamp NULL,
+	observacaoprojur text NULL,
+	gerefi_id int8 NULL,
+	processo_cores int8 NULL,
+	observacaodiop text NULL,
+	CONSTRAINT demanda_pkey PRIMARY KEY (id),
+	CONSTRAINT unique_protocolo UNIQUE (protocolo),
+	CONSTRAINT demanda_gerenteconclusao_id_fkey FOREIGN KEY (gerenteconclusao_id) REFERENCES public.usuario(id),
+	CONSTRAINT demanda_rota_id_fkey FOREIGN KEY (rota_id) REFERENCES public.rota(id),
+	CONSTRAINT demanda_usuariocancelamento_id_fkey FOREIGN KEY (usuariocancelamento_id) REFERENCES public.usuario(id),
+	CONSTRAINT fk39ppojqecakn4ijwubq7j1y4y FOREIGN KEY (usuariocancelamento_id) REFERENCES public.usuario(id),
+	CONSTRAINT fk4hsftrx13enriy7j0tx5gxd3m FOREIGN KEY (rota_id) REFERENCES public.rota(id),
+	CONSTRAINT fk5hhk8glu57ic1dqnofwtl4e6p FOREIGN KEY (fiscalizado_id) REFERENCES public.pessoa(id),
+	CONSTRAINT fk5p45gsb2v0qnoldtetkn6ae8r FOREIGN KEY (grupodemanda_id) REFERENCES public.grupodemanda(id),
+	CONSTRAINT fk_4ud0cu4ffq9bonewcyn7vp4j6 FOREIGN KEY (fiscalizado_id) REFERENCES public.pessoa(id),
+	CONSTRAINT fk_d0aa0d40t4fmiac8cymxylpg4 FOREIGN KEY (grupodemanda_id) REFERENCES public.grupodemanda(id),
+	CONSTRAINT fk_frio51yveom2qdgvc69px2jvw FOREIGN KEY (pessoageradora_id) REFERENCES public.pessoa(id),
+	CONSTRAINT fk_iphmdao4qv9d0wk85iw3fln16 FOREIGN KEY (plano_id) REFERENCES public.planofiscalizacao(id),
+	CONSTRAINT fk_jcicek1ij47ixlqfweheak6gh FOREIGN KEY (demanda_id) REFERENCES public.demanda(id),
+	CONSTRAINT fk_n62kkpycy3rbj4n7c2eiatuml FOREIGN KEY (unidadeoperacional_id) REFERENCES public.unidadeoperacional(id),
+	CONSTRAINT fk_o1ma31s9xrg5nc947leqvkjcf FOREIGN KEY (regional_id) REFERENCES public.regional(id),
+	CONSTRAINT fk_qg00y5vi9020lls47wvc4ycmo FOREIGN KEY (operacao_id) REFERENCES public.operacao(id),
+	CONSTRAINT fk_sf48ko3sacwisa6s68ah32i01 FOREIGN KEY (os_id) REFERENCES public.os(id),
+	CONSTRAINT fkb036c39ybwfqlaeqin2wp3fwc FOREIGN KEY (demanda_id) REFERENCES public.demanda(id),
+	CONSTRAINT fkcu8cjomue7t3ix4ayl9js3p0g FOREIGN KEY (gerenteconclusao_id) REFERENCES public.usuario(id),
+	CONSTRAINT fkd40j852jb2mfphxi90nprhili FOREIGN KEY (regional_id) REFERENCES public.regional(id),
+	CONSTRAINT fkfmhmduq1livtenpcvd20aequ6 FOREIGN KEY (plano_id) REFERENCES public.planofiscalizacao(id),
+	CONSTRAINT fkhkt1brtra7t3dsgrao96ftpbt FOREIGN KEY (prioridade_demanda_id) REFERENCES v2_fiscalizacao.prioridade_demanda(id),
+	CONSTRAINT fkkva5r41uhr4wjspajd1gxmm1u FOREIGN KEY (grupodemanda_id) REFERENCES public.grupodemanda(id),
+	CONSTRAINT fkm1sfubhao183wbpcvho2qxeef FOREIGN KEY (cnae_id) REFERENCES public.cnae(id),
+	CONSTRAINT fkmgw83bdjohn0ue1tud1yymhou FOREIGN KEY (unidadeoperacional_id) REFERENCES public.unidadeoperacional(id),
+	CONSTRAINT fkq0by2byu64ew0scrj620up98r FOREIGN KEY (pessoageradora_id) REFERENCES public.pessoa(id),
+	CONSTRAINT fkq3lc7r0vmb5a7iy82pnpk01eb FOREIGN KEY (unidadeoperacional_id) REFERENCES public.unidadeoperacional(id),
+	CONSTRAINT fkqgaop5trqleic3g6fpe97qpj1 FOREIGN KEY (processo_cores) REFERENCES v2_integracao.processo_cores(id),
+	CONSTRAINT fkrlt5m25iqau8esumdr00drk9n FOREIGN KEY (pessoageradora_id) REFERENCES public.pessoa(id),
+	CONSTRAINT fks048nkd7pegrveyg64ssgv26u FOREIGN KEY (gerefi_id) REFERENCES v2_cadastro.gerefi(id),
+	CONSTRAINT fkt3bpb46i0xr2rr99evufqa1cw FOREIGN KEY (operacao_id) REFERENCES public.operacao(id),
+	CONSTRAINT fktkjkyefho9pmxvbggbmu4j01k FOREIGN KEY (fiscalizado_id) REFERENCES public.pessoa(id)
+);
+CREATE INDEX demanda_ativo_idx ON public.demanda USING btree (ativo, data_criacao);
+CREATE INDEX demanda_datafiscalizacao_idx ON public.demanda USING btree (datafiscalizacao, dataexecucao);
+CREATE INDEX demanda_grupodemanda_id_idx ON public.demanda USING btree (grupodemanda_id, regional_id);
+CREATE INDEX demanda_rota_id_idx ON public.demanda USING btree (rota_id);
+CREATE INDEX demanda_situacao_idx ON public.demanda USING btree (situacao);
+
+-- Table Triggers
+
+CREATE TRIGGER on_insert_after_demanda AFTER
+INSERT
+    ON
+    public.demanda FOR EACH ROW EXECUTE PROCEDURE funcoes.on_insert_after_demanda();
+CREATE TRIGGER on_insert_demanda BEFORE
+INSERT
+    ON
+    public.demanda FOR EACH ROW EXECUTE PROCEDURE funcoes.on_insert_demanda();
+CREATE TRIGGER on_update_demanda BEFORE
+UPDATE
+    ON
+    public.demanda FOR EACH ROW EXECUTE PROCEDURE funcoes.on_update_demanda();
+CREATE TRIGGER after_update_demanda AFTER
+UPDATE
+    ON
+    public.demanda FOR EACH ROW
+    WHEN ((old.ativo IS DISTINCT
+FROM
+    new.ativo)) EXECUTE PROCEDURE v2_fiscalizacao.tentar_tramitar_por_demanda();

@@ -1,0 +1,147 @@
+-- public.autoinfracao definition
+
+-- Drop table
+
+-- DROP TABLE public.autoinfracao;
+
+CREATE TABLE public.autoinfracao (
+	id int8 DEFAULT nextval('hibernate_sequence'::regclass) NOT NULL,
+	ativo bool NOT NULL,
+	data_criacao timestamp NOT NULL,
+	alvaraprocesso varchar(255) NULL,
+	areaconstrucao varchar(255) NULL,
+	areaestabelecimento varchar(255) NULL,
+	credenciamento_processo varchar(255) NULL,
+	dataconstatacao timestamp NULL,
+	descricao text NULL,
+	diasprazodefesa int4 NULL,
+	fundamentacaolegal text NULL,
+	licencaambiental_processo varchar(255) NULL,
+	localinfracao varchar(255) NULL,
+	numerodocumentofiscal int8 NOT NULL,
+	registrosanitario_processo_validade varchar(255) NULL,
+	serie varchar(255) NOT NULL,
+	termoaprovacaopgrs_processo varchar(255) NULL,
+	pessoa_id int8 NOT NULL,
+	fiscal_id int8 NULL,
+	grupodemanda_id int8 NULL,
+	multa varchar(255) NULL,
+	valorpago varchar(255) NULL,
+	percentualdesconto varchar(255) NULL,
+	infracao_id int8 NULL,
+	situacao int4 NULL,
+	tipoauto int4 NULL,
+	dataciencia timestamp NULL,
+	usuarioalteracao varchar(255) NULL,
+	justificativacancelamento text NULL,
+	demanda_id int8 NULL,
+	dataconclusao timestamp NULL,
+	prazoregularizacao int4 NULL,
+	datacancelamento timestamp NULL,
+	usuariocancelamento varchar(255) NULL,
+	fundomunicipal_id int4 NULL,
+	os_id int8 NULL,
+	esorteavel bool NULL,
+	julgador_id int8 NULL,
+	usuarioconclusao_id int8 NULL,
+	datadevolucaopresidencia timestamp NULL,
+	enviopgmdata timestamp NULL,
+	enviopgmusuario_id int8 NULL,
+	bairro varchar(255) NULL,
+	complemento varchar(255) NULL,
+	latitude varchar(255) NULL,
+	logradouro varchar(255) NULL,
+	longitude varchar(255) NULL,
+	numero varchar(255) NULL,
+	datajuntada timestamp NULL,
+	diasprazoadvertencia int4 NULL,
+	dataarquivamento timestamp NULL,
+	dataprazoadvertencia date NULL,
+	justificativaarquivamento varchar(255) NULL,
+	usuarioarquivamento varchar(255) NULL,
+	dataprazodefesa timestamp NULL,
+	tipoprazodefesa varchar(255) NULL,
+	datacancelamento1inst timestamp NULL,
+	datacancelamento1instrecursooficio timestamp NULL,
+	datacancelamento2inst timestamp NULL,
+	datainicioprazorecurso timestamp NULL,
+	datajulg1inst timestamp NULL,
+	datajulg2inst timestamp NULL,
+	datalimiteprazorecurso timestamp NULL,
+	numeroprocessospu varchar(255) NULL,
+	parecer2inst text NULL,
+	parecerdespacho text NULL,
+	prazorecurso int4 NULL,
+	status varchar(255) NULL,
+	tipoinicioprazorecurso varchar(255) NULL,
+	tipoprazorecurso varchar(255) NULL,
+	julgador1inst_id int8 NULL,
+	julgador2inst_id int8 NULL,
+	procurador_id int8 NULL,
+	datacienciainfracao timestamp NULL,
+	envioinfracaoar bool NULL,
+	observacaodatacienciainfracao text NULL,
+	tipoprazonotificacao varchar(255) NULL,
+	datadistribuicaojulgamento timestamp NULL,
+	datacongelamento timestamp(0) NULL,
+	juros varchar(255) NULL,
+	executoupenalidadeadm bool NULL,
+	data_ciencia_edital timestamp NULL,
+	data_segundo_envio_ar timestamp NULL,
+	tem_apreensao bool NULL,
+	regional_id int8 NULL,
+	egeplae bool NULL,
+	efundo_excecao bool NULL,
+	gerefi_id int8 NULL,
+	data_transitado_julgado timestamp NULL,
+	valor_debito float8 NULL,
+	CONSTRAINT autoinfracao_pkey PRIMARY KEY (id),
+	CONSTRAINT autoinfracao_fundomunicipal_id_fkey FOREIGN KEY (fundomunicipal_id) REFERENCES public.fundomunicipal(id),
+	CONSTRAINT fk_5l8avub6yiynms5l8mn94hgwm FOREIGN KEY (julgador_id) REFERENCES public.usuario(id),
+	CONSTRAINT fk_8e8n8oobbpo4e6x7frg06h7kf FOREIGN KEY (demanda_id) REFERENCES public.demanda(id),
+	CONSTRAINT fk_c2ht1gfub3xks7jqlfqtbhg9v FOREIGN KEY (grupodemanda_id) REFERENCES public.grupodemanda(id),
+	CONSTRAINT fk_i1578l0dwa0hgsk8ysr3rif2h FOREIGN KEY (pessoa_id) REFERENCES public.pessoa(id),
+	CONSTRAINT fk_nthtwv3t9spqi7m9ysr0gtviq FOREIGN KEY (infracao_id) REFERENCES public.infracao(id),
+	CONSTRAINT fk_p9xkmthpqommwjmxfspwx95ia FOREIGN KEY (usuarioconclusao_id) REFERENCES public.usuario(id),
+	CONSTRAINT fk_procurador FOREIGN KEY (procurador_id) REFERENCES public.pessoa(id),
+	CONSTRAINT fk_qvp93jpewnk0nludt7j6dcxwp FOREIGN KEY (fiscal_id) REFERENCES public.usuario(id),
+	CONSTRAINT fkadmdikpw7qk380rxb0bufhnr8 FOREIGN KEY (julgador_id) REFERENCES public.usuario(id),
+	CONSTRAINT fkaskk88ev1qp23x4m5966ytm26 FOREIGN KEY (usuarioconclusao_id) REFERENCES public.usuario(id),
+	CONSTRAINT fkck4a20ln6qvnat4lr87q9gqgn FOREIGN KEY (julgador1inst_id) REFERENCES public.usuario(id),
+	CONSTRAINT fke9dwo2kadu89t3a90e445aq12 FOREIGN KEY (fundomunicipal_id) REFERENCES public.fundomunicipal(id),
+	CONSTRAINT fkeo5i23iks1941t14db4exmd7n FOREIGN KEY (regional_id) REFERENCES public.regional(id),
+	CONSTRAINT fkhtiwteaghir3w7fa1ahx8dhrn FOREIGN KEY (julgador2inst_id) REFERENCES public.usuario(id),
+	CONSTRAINT fkk2uyx5lxp47hhjj2qecnybog3 FOREIGN KEY (demanda_id) REFERENCES public.demanda(id),
+	CONSTRAINT fklsnfrhx0x200f1vmky6dh7e2r FOREIGN KEY (pessoa_id) REFERENCES public.pessoa(id),
+	CONSTRAINT fkme16tqk93psbcfl431o500hs9 FOREIGN KEY (gerefi_id) REFERENCES v2_cadastro.gerefi(id),
+	CONSTRAINT fkn9vecfcgcf5rn8rm0j6eqqewt FOREIGN KEY (grupodemanda_id) REFERENCES public.grupodemanda(id),
+	CONSTRAINT fkp0usjakd65manovsvrk7vvqsw FOREIGN KEY (fiscal_id) REFERENCES public.usuario(id),
+	CONSTRAINT fkr2db83py6yknlv6jtxxqy4srs FOREIGN KEY (pessoa_id) REFERENCES public.pessoa(id),
+	CONSTRAINT fkrhh83bivjemutx0xjsbvelnyb FOREIGN KEY (procurador_id) REFERENCES public.pessoa(id),
+	CONSTRAINT fks88jpejo9cdp26v6avdoy6qyl FOREIGN KEY (infracao_id) REFERENCES public.infracao(id),
+	CONSTRAINT fksa02sg30h1971y8qysdh8c6g8 FOREIGN KEY (grupodemanda_id) REFERENCES public.grupodemanda(id)
+);
+CREATE INDEX autoinfracao_ativo_idx ON public.autoinfracao USING btree (ativo, data_criacao);
+CREATE INDEX autoinfracao_demanda_id_idx ON public.autoinfracao USING btree (demanda_id);
+CREATE INDEX autoinfracao_numerodocumentofiscal_idx ON public.autoinfracao USING btree (numerodocumentofiscal, serie);
+CREATE INDEX autoinfracao_pessoa_id_idx ON public.autoinfracao USING btree (pessoa_id, fiscal_id, demanda_id);
+CREATE INDEX autoinfracao_tipoauto_idx ON public.autoinfracao USING btree (tipoauto, status);
+
+-- Table Triggers
+
+CREATE TRIGGER after_update_auto AFTER
+UPDATE
+    ON
+    public.autoinfracao FOR EACH ROW EXECUTE PROCEDURE funcoes.after_update_auto();
+CREATE TRIGGER on_insert_auto BEFORE
+INSERT
+    ON
+    public.autoinfracao FOR EACH ROW EXECUTE PROCEDURE funcoes.before_insert_auto();
+CREATE TRIGGER on_update_auto BEFORE
+UPDATE
+    ON
+    public.autoinfracao FOR EACH ROW EXECUTE PROCEDURE funcoes.on_update_auto();
+CREATE TRIGGER after_insert_auto AFTER
+INSERT
+    ON
+    public.autoinfracao FOR EACH ROW EXECUTE PROCEDURE funcoes.after_insert_auto();
