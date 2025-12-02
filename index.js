@@ -1,5 +1,8 @@
 import postgres from "postgres";
 import { SQL } from "bun";
+import cron from "node-cron";
+import { writeFileSync, readFileSync, existsSync } from "fs";
+import { join } from "path";
 
 // ============================================================
 // CONFIGURAÇÃO
@@ -10,10 +13,11 @@ const CONFIG = {
         url: process.env.DATABASE_ORIGEM_URL || "postgres://postgres:postgres@localhost:5432/fiscalize",
     },
     destino: {
-        url: process.env.DATABASE_DESTINO_URL || "postgres://postgres:postgres@localhost:5432/agefisAA",
+        url: process.env.DATABASE_DESTINO_URL || "postgres://postgres:postgres@localhost:5432/agefis",
     },
     canal: "sync_channel",
     reconnectDelay: 5000, // 5 segundos para reconexão
+    cronReconciliacao: process.env.CRON_RECONCILIACAO || "*/10 * * * *", // A cada 10 minutos
 };
 
 // Conexão com banco de origem usando postgres.js (suporta LISTEN/NOTIFY)
@@ -21,6 +25,59 @@ const dbOrigem = postgres(CONFIG.origem.url);
 
 // Conexão com banco de destino usando Bun SQL (para escrita)
 const dbDestino = new SQL(CONFIG.destino.url);
+
+// ============================================================
+// LOGGING DE ERROS DE CONSTRAINT
+// ============================================================
+
+const ERROS_FILE = "./erros_sincronizacao.json";
+
+function carregarErros() {
+    if (existsSync(ERROS_FILE)) {
+        try {
+            const conteudo = readFileSync(ERROS_FILE, "utf-8");
+            return JSON.parse(conteudo);
+        } catch (error) {
+            console.error("❌ Erro ao ler arquivo de erros:", error.message);
+            return { constraint_errors: [], total: 0, ultima_atualizacao: new Date().toISOString() };
+        }
+    }
+    return { constraint_errors: [], total: 0, ultima_atualizacao: new Date().toISOString() };
+}
+
+function salvarErro(id, table, tipo_erro, mensagem_erro, grupo_ocorrencia_id = null) {
+    const erros = carregarErros();
+    
+    // Verificar se já existe este erro
+    const jaExiste = erros.constraint_errors.some(e => e.id === id && e.table === table);
+    
+    if (!jaExiste) {
+        erros.constraint_errors.push({
+            id,
+            table,
+            grupo_ocorrencia_id,
+            tipo_erro,
+            mensagem_erro,
+            timestamp: new Date().toISOString(),
+        });
+        
+        // Agregar IDs únicos faltando
+        if (!erros.grupos_ocorrencia_faltando) {
+            erros.grupos_ocorrencia_faltando = [];
+        }
+        
+        if (grupo_ocorrencia_id && !erros.grupos_ocorrencia_faltando.includes(grupo_ocorrencia_id)) {
+            erros.grupos_ocorrencia_faltando.push(grupo_ocorrencia_id);
+        }
+        
+        erros.total = erros.constraint_errors.length;
+        erros.total_grupos_unicos = erros.grupos_ocorrencia_faltando.length;
+        erros.ultima_atualizacao = new Date().toISOString();
+        
+        writeFileSync(ERROS_FILE, JSON.stringify(erros, null, 2));
+        console.log(`📝 Erro registrado em ${ERROS_FILE} (Total: ${erros.total}, Grupos faltando: ${erros.total_grupos_unicos})`);
+    }
+}
 
 // ============================================================
 // MAPEAMENTO DE CAMPOS: demanda (origem) -> demandas (destino)
@@ -31,21 +88,25 @@ const dbDestino = new SQL(CONFIG.destino.url);
  * Apenas campos que existem no schema do destino são mapeados
  */
 function mapearDemanda(dataOrigem) {
+    // Converte ID para número (a origem pode retornar como string)
+    const id = typeof dataOrigem.id === 'string' ? parseInt(dataOrigem.id, 10) : dataOrigem.id;
+    const grupo_ocorrencia_id = typeof dataOrigem.grupodemanda_id === 'string' ? parseInt(dataOrigem.grupodemanda_id, 10) : dataOrigem.grupodemanda_id;
+
     return {
         // Campo ID
-        id: dataOrigem.id,
+        id: id,
 
         // Situação e motivo
-        situacao_id: dataOrigem.situacao || 1,
-        motivo_id: null, // Não existe na origem (pode ser preenchido depois)
+        situacao_id: dataOrigem.situacao,
+        motivo_id: null, // Não existe na origem 
         fiscal_id: null, // Será preenchido depois se necessário
 
         // Identificação da demanda
-        fiscalizado_demanda: dataOrigem.protocolo || `DEMANDA-${dataOrigem.id}`,
+        fiscalizado_demanda: dataOrigem.descricao || dataOrigem.protocolo || `DEMANDA-${dataOrigem.id}`,
 
-        // Dados do fiscalizado (podem vir de join com pessoa depois)
-        fiscalizado_cpf_cnpj: "", // TODO: buscar da tabela pessoa por fiscalizado_id
-        fiscalizado_nome: "", // TODO: buscar da tabela pessoa por fiscalizado_id
+        // Dados do fiscalizado (deixar vazio por enquanto)
+        fiscalizado_cpf_cnpj: "",
+        fiscalizado_nome: "",
 
         // Endereço do fiscalizado
         fiscalizado_logradouro: dataOrigem.logradouro || "",
@@ -73,7 +134,7 @@ function mapearDemanda(dataOrigem) {
         tipo_rota: dataOrigem.tipo_rota || null,
 
         // Relacionamentos
-        grupo_ocorrencia_id: dataOrigem.grupodemanda_id || 1,
+        grupo_ocorrencia_id: grupo_ocorrencia_id || 1,
     };
 }
 
@@ -85,6 +146,8 @@ async function sincronizarDemanda(event_type, data) {
     const demandaMapeada = mapearDemanda(data);
 
     try {
+        console.log(`\n🔍 DEBUG ${event_type} ID ${data.id}:`, JSON.stringify(demandaMapeada, null, 2));
+
         if (event_type === "INSERT") {
             await dbDestino`
         INSERT INTO fiscalizacao.demandas (
@@ -92,7 +155,7 @@ async function sincronizarDemanda(event_type, data) {
           fiscalizado_demanda, fiscalizado_cpf_cnpj, fiscalizado_nome,
           fiscalizado_logradouro, fiscalizado_numero, fiscalizado_complemento,
           fiscalizado_bairro, fiscalizado_municipio, fiscalizado_uf,
-          fiscalizado_lat, fiscalizado_lng, classificacao,
+          fiscalizado_lat, fiscalizado_lng,
           data_criacao, data_realizacao, ativo, tipo_rota, grupo_ocorrencia_id
         )
         VALUES (
@@ -111,7 +174,6 @@ async function sincronizarDemanda(event_type, data) {
           ${demandaMapeada.fiscalizado_uf},
           ${demandaMapeada.fiscalizado_lat},
           ${demandaMapeada.fiscalizado_lng},
-          ${demandaMapeada.classificacao}::fiscalizacao.classificacao_os,
           ${demandaMapeada.data_criacao},
           ${demandaMapeada.data_realizacao},
           ${demandaMapeada.ativo},
@@ -134,21 +196,62 @@ async function sincronizarDemanda(event_type, data) {
         }
 
         if (event_type === "UPDATE") {
-            await dbDestino`
-        UPDATE fiscalizacao.demandas SET
-          situacao_id = ${demandaMapeada.situacao_id},
-          fiscalizado_demanda = ${demandaMapeada.fiscalizado_demanda},
-          fiscalizado_logradouro = ${demandaMapeada.fiscalizado_logradouro},
-          fiscalizado_numero = ${demandaMapeada.fiscalizado_numero},
-          fiscalizado_complemento = ${demandaMapeada.fiscalizado_complemento},
-          fiscalizado_bairro = ${demandaMapeada.fiscalizado_bairro},
-          fiscalizado_lat = ${demandaMapeada.fiscalizado_lat},
-          fiscalizado_lng = ${demandaMapeada.fiscalizado_lng},
-          data_realizacao = ${demandaMapeada.data_realizacao},
-          ativo = ${demandaMapeada.ativo}
-        WHERE id = ${data.id}
-      `;
-            console.log(`✅ UPDATE demanda ID ${data.id}`);
+            // Primeiro verifica se o registro existe
+            const existe = await dbDestino`SELECT id FROM fiscalizacao.demandas WHERE id = ${demandaMapeada.id}`;
+
+            if (existe.length === 0) {
+                console.warn(`⚠️ Registro não encontrado no destino ID ${demandaMapeada.id}, fazendo INSERT...`);
+                // Se não existir, faz INSERT
+                await dbDestino`
+            INSERT INTO fiscalizacao.demandas (
+              id, situacao_id, motivo_id, fiscal_id,
+              fiscalizado_demanda, fiscalizado_cpf_cnpj, fiscalizado_nome,
+              fiscalizado_logradouro, fiscalizado_numero, fiscalizado_complemento,
+              fiscalizado_bairro, fiscalizado_municipio, fiscalizado_uf,
+              fiscalizado_lat, fiscalizado_lng,
+              data_criacao, data_realizacao, ativo, tipo_rota, grupo_ocorrencia_id
+            )
+            VALUES (
+              ${demandaMapeada.id},
+              ${demandaMapeada.situacao_id},
+              ${demandaMapeada.motivo_id},
+              ${demandaMapeada.fiscal_id},
+              ${demandaMapeada.fiscalizado_demanda},
+              ${demandaMapeada.fiscalizado_cpf_cnpj},
+              ${demandaMapeada.fiscalizado_nome},
+              ${demandaMapeada.fiscalizado_logradouro},
+              ${demandaMapeada.fiscalizado_numero},
+              ${demandaMapeada.fiscalizado_complemento},
+              ${demandaMapeada.fiscalizado_bairro},
+              ${demandaMapeada.fiscalizado_municipio},
+              ${demandaMapeada.fiscalizado_uf},
+              ${demandaMapeada.fiscalizado_lat},
+              ${demandaMapeada.fiscalizado_lng},
+              ${demandaMapeada.data_criacao},
+              ${demandaMapeada.data_realizacao},
+              ${demandaMapeada.ativo},
+              ${demandaMapeada.tipo_rota},
+              ${demandaMapeada.grupo_ocorrencia_id}
+            )`;
+                console.log(`✅ INSERT (por UPDATE) demanda ID ${demandaMapeada.id}`);
+            } else {
+                // Se existir, faz UPDATE
+                const resultado = await dbDestino`
+            UPDATE fiscalizacao.demandas SET
+              situacao_id = ${demandaMapeada.situacao_id},
+              fiscalizado_demanda = ${demandaMapeada.fiscalizado_demanda},
+              fiscalizado_logradouro = ${demandaMapeada.fiscalizado_logradouro},
+              fiscalizado_numero = ${demandaMapeada.fiscalizado_numero},
+              fiscalizado_complemento = ${demandaMapeada.fiscalizado_complemento},
+              fiscalizado_bairro = ${demandaMapeada.fiscalizado_bairro},
+              fiscalizado_lat = ${demandaMapeada.fiscalizado_lat},
+              fiscalizado_lng = ${demandaMapeada.fiscalizado_lng},
+              data_realizacao = ${demandaMapeada.data_realizacao},
+              ativo = ${demandaMapeada.ativo}
+            WHERE id = ${demandaMapeada.id}
+          `;
+                console.log(`✅ UPDATE demanda ID ${demandaMapeada.id}, registros afetados: ${resultado.count}`);
+            }
         }
 
         if (event_type === "DELETE") {
@@ -159,6 +262,18 @@ async function sincronizarDemanda(event_type, data) {
         }
     } catch (error) {
         console.error(`❌ Erro ao sincronizar demanda ID ${data.id}:`, error.message);
+        
+        // Verificar se é erro de constraint (FK)
+        if (error.message.includes("violates foreign key constraint")) {
+            salvarErro(
+                data.id,
+                "demandas",
+                "foreign_key_constraint",
+                error.message,
+                demandaMapeada.grupo_ocorrencia_id
+            );
+        }
+        
         // TODO: Implementar Dead Letter Queue ou retry
         throw error;
     }
@@ -176,9 +291,6 @@ async function sincronizarDemanda(event_type, data) {
  */
 async function buscarRegistroOrigem(table, id) {
     try {
-        // postgres.js requer usar tagged template literals
-        // Usamos sql() para nomes de tabela dinâmicos
-        const sql = postgres(CONFIG.origem.url);
 
         // Executa query usando postgres.js com template literal
         // Nota: não podemos usar ${table} diretamente, precisamos de uma solução
@@ -209,6 +321,110 @@ const HANDLERS = {
     // Adicionar mais handlers conforme necessário:
     // "public.pessoa": sincronizarPessoa,
 };
+
+// ============================================================
+// VERIFICAÇÃO DE GAPS - RECONCILIAÇÃO
+// ============================================================
+
+async function verificarGaps() {
+    console.log("\n🔍 Verificando inconsistências (Reconciliação)...");
+
+    try {
+        // Pega os últimos 1000 IDs da origem
+        const origemIds = await dbOrigem`
+            SELECT id FROM public.demanda 
+            ORDER BY id DESC LIMIT 500
+        `;
+
+        if (origemIds.length === 0) {
+            console.log("📭 Nenhum registro na origem para verificar");
+            return;
+        }
+
+        const minId = origemIds[origemIds.length - 1].id;
+        const maxId = origemIds[0].id;
+
+        // Pega o que temos no destino nesse range
+        const destinoIds = await dbDestino`
+            SELECT id FROM fiscalizacao.demandas 
+            WHERE id BETWEEN ${minId} AND ${maxId}
+        `;
+
+        // Cria Sets para comparação rápida
+        const setDestino = new Set(destinoIds.map(d => d.id));
+        
+        // Filtra quem está na origem mas NÃO no destino
+        const faltantes = origemIds.filter(d => !setDestino.has(d.id));
+
+        if (faltantes.length > 0) {
+            console.warn(`⚠️ Encontrados ${faltantes.length} registros faltando! Sincronizando...`);
+            
+            let sincronizados = 0;
+            let erros = 0;
+
+            for (const item of faltantes) {
+                try {
+                    console.log(`🔄 Recuperando ID perdido: ${item.id}`);
+                    // Reutiliza sua lógica existente
+                    const registro = await buscarRegistroOrigem("public.demanda", item.id);
+                    if (registro) {
+                        await sincronizarDemanda("INSERT", registro);
+                        sincronizados++;
+                    }
+                } catch (error) {
+                    console.error(`❌ Erro ao sincronizar ID ${item.id}:`, error.message);
+                    
+                    // Registrar erros de constraint
+                    if (error.message.includes("violates foreign key constraint")) {
+                        salvarErro(
+                            item.id,
+                            "demandas",
+                            "foreign_key_constraint",
+                            error.message,
+                            origemIds.find(o => o.id === item.id)?.grupo_ocorrencia_id || null
+                        );
+                    }
+                    
+                    erros++;
+                }
+            }
+
+            console.log(`✅ Reconciliação concluída: ${sincronizados} sincronizados, ${erros} erros`);
+        } else {
+            console.log("✅ Nenhuma inconsistência recente encontrada.");
+        }
+    } catch (error) {
+        console.error("❌ Erro ao verificar gaps:", error.message);
+    }
+}
+
+// ============================================================
+// AGENDAMENTO - CRON JOB
+// ============================================================
+
+let cronJob = null;
+
+function iniciarCronReconciliacao() {
+    console.log(`⏰ Agendando reconciliação com cron: "${CONFIG.cronReconciliacao}"`);
+    
+    cronJob = cron.schedule(CONFIG.cronReconciliacao, async () => {
+        console.log(`\n⏱️  [${new Date().toISOString()}] Executando reconciliação agendada...`);
+        await verificarGaps();
+    }, {
+        runOnInit: false, // Não executar na inicialização
+        timezone: "America/Fortaleza" // Usar fuso horário local
+    });
+
+    console.log("✅ Cron job de reconciliação ativo");
+}
+
+function pararCronReconciliacao() {
+    if (cronJob) {
+        cronJob.stop();
+        cronJob.destroy();
+        console.log("🛑 Cron job de reconciliação parado");
+    }
+}
 
 // ============================================================
 // LISTENER - USANDO LISTEN/NOTIFY DO POSTGRES
@@ -264,8 +480,6 @@ async function iniciarListener() {
 
         console.log("✅ Listener ativo e aguardando notificações...");
 
-        // Mantém o processo rodando
-        await new Promise(() => { }); // Promise que nunca resolve
 
     } catch (error) {
         console.error("❌ Erro no listener:", error.message);
@@ -283,6 +497,8 @@ async function iniciarListener() {
 
 async function shutdown() {
     console.log("\n🛑 Encerrando middleware...");
+
+    pararCronReconciliacao();
 
     try {
         await dbOrigem.end(); // postgres.js usa .end()
@@ -306,3 +522,8 @@ console.log("🚀 Middleware de Sincronização de Demandas");
 console.log("=========================================");
 
 iniciarListener();
+iniciarCronReconciliacao();
+
+// Trigger imediato da reconciliação
+console.log("⚡ Executando reconciliação imediata na inicialização...");
+verificarGaps();
