@@ -45,37 +45,70 @@ function carregarErros() {
     return { constraint_errors: [], total: 0, ultima_atualizacao: new Date().toISOString() };
 }
 
-function salvarErro(id, table, tipo_erro, mensagem_erro, grupo_ocorrencia_id = null) {
+function extrairConstraintInfo(mensagemErro) {
+    // Extrai o nome da constraint do erro
+    const constraintMatch = mensagemErro.match(/constraint "([^"]+)"/);
+    const constraintName = constraintMatch ? constraintMatch[1] : null;
+
+    // Determina qual campo causou o erro baseado no nome da constraint
+    let campo = null;
+    if (constraintName) {
+        // Pattern: tabela_campo_fkey
+        const campoMatch = constraintName.match(/demandas_(.+)_fkey/);
+        campo = campoMatch ? campoMatch[1] : constraintName;
+    }
+
+    return { constraintName, campo };
+}
+
+function salvarErro(id, table, tipo_erro, mensagem_erro, dadosCompletos = null) {
     const erros = carregarErros();
-    
-    // Verificar se já existe este erro
-    const jaExiste = erros.constraint_errors.some(e => e.id === id && e.table === table);
-    
+
+    // Verificar se já existe este erro exato
+    const jaExiste = erros.constraint_errors.some(e => e.id === id && e.table === table && e.mensagem_erro === mensagem_erro);
+
     if (!jaExiste) {
-        erros.constraint_errors.push({
+        const { constraintName, campo } = extrairConstraintInfo(mensagem_erro);
+
+        // Extrair valor do campo que causou o erro
+        let valorProblematico = null;
+        if (campo && dadosCompletos) {
+            valorProblematico = dadosCompletos[campo];
+        }
+
+        const erroDetalhado = {
             id,
             table,
-            grupo_ocorrencia_id,
             tipo_erro,
+            constraint_name: constraintName,
+            campo_erro: campo,
+            valor_problematico: valorProblematico,
+            dados_completos: dadosCompletos,
             mensagem_erro,
             timestamp: new Date().toISOString(),
-        });
-        
-        // Agregar IDs únicos faltando
-        if (!erros.grupos_ocorrencia_faltando) {
-            erros.grupos_ocorrencia_faltando = [];
+        };
+
+        erros.constraint_errors.push(erroDetalhado);
+
+        // Agregar valores únicos faltando por tipo de constraint
+        if (!erros.valores_faltando) {
+            erros.valores_faltando = {};
         }
-        
-        if (grupo_ocorrencia_id && !erros.grupos_ocorrencia_faltando.includes(grupo_ocorrencia_id)) {
-            erros.grupos_ocorrencia_faltando.push(grupo_ocorrencia_id);
+
+        if (campo && valorProblematico !== null && valorProblematico !== undefined) {
+            if (!erros.valores_faltando[campo]) {
+                erros.valores_faltando[campo] = [];
+            }
+            if (!erros.valores_faltando[campo].includes(valorProblematico)) {
+                erros.valores_faltando[campo].push(valorProblematico);
+            }
         }
-        
+
         erros.total = erros.constraint_errors.length;
-        erros.total_grupos_unicos = erros.grupos_ocorrencia_faltando.length;
         erros.ultima_atualizacao = new Date().toISOString();
-        
+
         writeFileSync(ERROS_FILE, JSON.stringify(erros, null, 2));
-        console.log(`📝 Erro registrado em ${ERROS_FILE} (Total: ${erros.total}, Grupos faltando: ${erros.total_grupos_unicos})`);
+        console.log(`📝 Erro registrado: ${constraintName} - Campo: ${campo}, Valor: ${valorProblematico}`);
     }
 }
 
@@ -262,18 +295,18 @@ async function sincronizarDemanda(event_type, data) {
         }
     } catch (error) {
         console.error(`❌ Erro ao sincronizar demanda ID ${data.id}:`, error.message);
-        
+
         // Verificar se é erro de constraint (FK)
-        if (error.message.includes("violates foreign key constraint")) {
+        if (error.message.includes("violates foreign key constraint") || error.message.includes("violates")) {
             salvarErro(
                 data.id,
                 "demandas",
                 "foreign_key_constraint",
                 error.message,
-                demandaMapeada.grupo_ocorrencia_id
+                demandaMapeada // Passa todos os dados mapeados para debug
             );
         }
-        
+
         // TODO: Implementar Dead Letter Queue ou retry
         throw error;
     }
@@ -333,7 +366,7 @@ async function verificarGaps() {
         // Pega os últimos 1000 IDs da origem
         const origemIds = await dbOrigem`
             SELECT id FROM public.demanda 
-            ORDER BY id DESC LIMIT 500
+            ORDER BY id DESC LIMIT 5000
         `;
 
         if (origemIds.length === 0) {
@@ -352,13 +385,13 @@ async function verificarGaps() {
 
         // Cria Sets para comparação rápida
         const setDestino = new Set(destinoIds.map(d => d.id));
-        
+
         // Filtra quem está na origem mas NÃO no destino
         const faltantes = origemIds.filter(d => !setDestino.has(d.id));
 
         if (faltantes.length > 0) {
             console.warn(`⚠️ Encontrados ${faltantes.length} registros faltando! Sincronizando...`);
-            
+
             let sincronizados = 0;
             let erros = 0;
 
@@ -373,18 +406,7 @@ async function verificarGaps() {
                     }
                 } catch (error) {
                     console.error(`❌ Erro ao sincronizar ID ${item.id}:`, error.message);
-                    
-                    // Registrar erros de constraint
-                    if (error.message.includes("violates foreign key constraint")) {
-                        salvarErro(
-                            item.id,
-                            "demandas",
-                            "foreign_key_constraint",
-                            error.message,
-                            origemIds.find(o => o.id === item.id)?.grupo_ocorrencia_id || null
-                        );
-                    }
-                    
+                    // Erro já registrado dentro de sincronizarDemanda
                     erros++;
                 }
             }
@@ -406,7 +428,7 @@ let cronJob = null;
 
 function iniciarCronReconciliacao() {
     console.log(`⏰ Agendando reconciliação com cron: "${CONFIG.cronReconciliacao}"`);
-    
+
     cronJob = cron.schedule(CONFIG.cronReconciliacao, async () => {
         console.log(`\n⏱️  [${new Date().toISOString()}] Executando reconciliação agendada...`);
         await verificarGaps();
