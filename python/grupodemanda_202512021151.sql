@@ -1,0 +1,192 @@
+INSERT INTO grupodemanda (id,ativo,data_criacao,descricao,nome,grupo_id,usuarioalteracao,fundomunicipal_id,pontuacaorota) VALUES
+	 (103187,true,'2017-10-20 12:12:36.504','Na zona de orla','3.10 Posturas e práticas inadequadas na zona de orla',103168,NULL,3,NULL),
+	 (103171,true,'2017-11-13 14:18:28.037','Exemplos: passeio (calçada) irregular','3.2 Posturas e práticas inadequadas no passeio (calçada)',103168,NULL,3,NULL),
+	 (103169,true,'2017-11-14 12:07:16.409','Falta de licença vigente','3.1 Posturas e práticas inadequadas falta de licença vigente',103168,NULL,3,NULL),
+	 (141504,true,'2018-01-31 11:57:25.444','Produtos e serviços não relacionados à saúde não incluídos nos demais subgrupos','18.13 Produtos e serviços não relacionados à saúde',9,NULL,NULL,NULL),
+	 (152692,true,'2017-11-14 15:08:37.808','Imóvel não interligado à rede pública de esgoto','6.4 Imóvel não interligado à rede de esgoto',15481,NULL,NULL,NULL),
+	 (152788,true,'2017-11-14 15:24:19.718','Irregularidades na Estação de Tratamento de Efluentes','4.9 Irregularidades na Estação de Tratamento de Efluentes',15479,NULL,NULL,NULL),
+	 (107660,true,'2017-11-14 15:56:48.973','Exemplos: água servida lançada na sarjeta ou na via pública','3.11 Posturas e práticas inadequadas por lançamento de água servida no passeios ou em via pública',103168,NULL,3,NULL),
+	 (191445,true,'2017-12-15 09:46:56.511','Lançamento de gordura ou outras sustâncias prejudiciais na rede de esgoto','3.13 Utilização inadequada da rede de esgoto',103168,NULL,NULL,NULL),
+	 (259327,true,'2018-02-01 15:11:45.905','Produtos e serviços em saúde inspecionados exclusivamente por profissionais da área de odontologia','20.05 Produtos e serviços em saúde - Odontologia',108020,NULL,NULL,NULL),
+	 (58217,true,'2017-07-24 09:07:55.093','PROCESSOS AGUARDANDO ANÁLISE','PROCESSOS AGUARDANDO ANÁLISE',NULL,NULL,NULL,NULL);
+INSERT INTO grupodemanda (id,ativo,data_criacao,descricao,nome,grupo_id,usuarioalteracao,fundomunicipal_id,pontuacaorota) VALUES
+	 (103168,true,'2017-10-20 12:04:02.643','Posturas e práticas inadequadas ','3.0 Posturas e práticas inadequadas – Denúncia',NULL,NULL,3,NULL),
+	 (256481,true,'2018-01-31 12:21:14.323','Produtos e serviços em saúde inspecionados exclusivamente por fiscais das áreas de Enfermagem e Alimentos','19.10 Produtos e serviços de interesse à saúde - Enfermagem e Alimentos',107854,NULL,NULL,NULL),
+	 (256298,true,'2018-02-01 15:00:18.055',' Produtos e serviços em saúde inspecionados exclusivamente por fiscais da área de Odontologia.','18.05 Produtos e serviços em saúde - Odontologia',9,NULL,NULL,NULL),
+	 (103172,true,'2017-10-31 10:57:08.02','Em estabelecimento comercial','3.3 Posturas e práticas inadequadas em estabelecimento comercial',103168,NULL,3,NULL),
+	 (103176,true,'2017-11-09 10:40:13.276','Na rua ou em canteiros centrais','3.6 Posturas e práticas inadequadas na rua ou em canteiros centrais',103168,NULL,3,NULL),
+	 (14044,true,'2017-11-10 09:14:35.192','15.21 Vistoria/inspeção após o Licenciamento de Alvará para Execução de Obras em Logradouro Público','15.21 Vistoria/inspeção após o Licenciamento de Alvará para Execução de Obras em Logradouro Público',10652,NULL,NULL,NULL),
+	 (227682,true,'2018-02-01 15:04:44.878','Produtos e serviços alimentícios inspecionados exclusivamente por fiscais da área de alimentos.','19.01  Produtos e serviços alimentícios',107854,NULL,NULL,NULL),
+	 (355737,true,'2018-03-21 14:57:34.838','Fiscalização dos licenciamentos cassados pelo órgão licenciador','9.0 Fiscalização de Licença Cassada',NULL,NULL,NULL,NULL),
+	 (10652,true,'2017-10-02 13:13:10.873','Vistoria/inspeção após o Licenciamento','15.0 Vistoria/inspeção após o Licenciamento',NULL,NULL,NULL,NULL),
+	 (227694,true,'2018-02-01 15:06:11.58','Produtos e serviços farmacêuticos inspecionados exclusivamente por profissionais da área de farmácia','19.03 Produtos e serviços farmacêuticos',107854,NULL,NULL,NULL);
+INSERT INTO grupodemanda (id,ativo,data_criacao,descricao,nome,grupo_id,usuarioalteracao,fundomunicipal_id,pontuacaorota) VALUES
+	 (227695,true,'2018-02-01 15:06:41.782','Produtos e serviços em saúde inspecionados exclusivamente por profissionais da área de enfermagem','19.04 Produtos e serviços em saúde - Enfermagem',107854,NULL,NULL,NULL),
+	 (95463,true,'2017-09-28 09:36:52.517','Denúncias de paredão de som, som em veículos','1.1 - Poluição Sonora por Veículo/Paredão',15472,NULL,5,NULL),
+	 (7,true,'2017-10-03 09:33:42.489','Resíduos Sólidos - Denúncia','12.0 Resíduos Sólidos - Denúncia',NULL,NULL,7,NULL),
+	 (15472,true,'2017-09-15 14:18:35.103','POLUIÇÃO SONORA','1.0 - Poluição Sonora - Denúncia',NULL,NULL,5,NULL),
+	 (95465,true,'2017-09-28 09:37:07.107','Denúncias de som alto em estabelecimento','1.2 - Poluição Sonora em Estabelecimento',15472,NULL,5,NULL),
+	 (96208,true,'2017-09-28 09:37:20.829','Poluição sonora verificada em casas de show, etc.','1.3 - Poluição Sonora em Evento particular',15472,NULL,5,NULL),
+	 (96209,true,'2017-09-28 09:37:34.678','Poluição sonora verificada em praças, praias, ruas, terrenos públicos, etc.','1.4 - Poluição Sonora em Espaço público',15472,NULL,5,NULL),
+	 (96212,true,'2017-09-28 09:37:45.581','Poluição Sonora causada por equipamentos e máquinas','1.5 - Poluição Sonora por Máquinas',15472,NULL,5,NULL),
+	 (96213,true,'2017-09-28 09:37:58.701','Poluição Sonora verificada em residências','1.6 - Poluição Sonora em Residência',15472,NULL,5,NULL),
+	 (152737,true,'2017-11-14 15:15:40.093','Lançamento de efluentes no logradouro','6.5 Lançamento de efluentes no logradouro',15481,NULL,NULL,NULL);
+INSERT INTO grupodemanda (id,ativo,data_criacao,descricao,nome,grupo_id,usuarioalteracao,fundomunicipal_id,pontuacaorota) VALUES
+	 (104240,true,'2017-12-15 09:38:56.129','Poluição hídrica na na rede de drenagem (Ligação de esgoto clandestino)','3.12  Ligação de esgoto na rede de drenagem',103168,NULL,4,NULL),
+	 (104241,true,'2017-12-15 09:41:49.808','Extravasamento de esgoto','4.7 Extravasamento de esgoto (Poço de Visita)',15479,NULL,4,NULL),
+	 (126290,true,'2018-02-01 14:58:36.926','Produtos e serviços alimentícios - Denúncia','18.01 Produtos e serviços alimentícios',9,NULL,NULL,NULL),
+	 (126294,true,'2018-02-01 15:03:21.12','Produtos e serviços de interesse à saúde inspecionados exclusivamente por profissionais da área de enfermagem','18.09 Produtos e serviços de interesse à saúde - Enfermagem',9,NULL,NULL,NULL),
+	 (241541,true,'2019-01-16 08:55:54.16','Monitorar a área da Sabiaguaba','17.4 Ações Programadas - Monitoramento da Sabiaguaba',109053,NULL,NULL,NULL),
+	 (108048,true,'2017-10-02 13:33:44.166','Vistoria/inspeção após o Licenciamento Termo de Permissão','15.10 Vistoria/inspeção após o Licenciamento Termo de Permissão',10652,NULL,NULL,NULL),
+	 (259344,true,'2018-02-01 14:55:00','Produtos e serviços em saúde inspecionados exclusivamente por profissionais da área de enfermagem e farmácia','20.06 PRODUTOS E SERVIÇOS EM SAÚDE - ENFERMAGEM, ODONTOLOGIA E FARMÁCIA',108020,NULL,NULL,NULL),
+	 (227683,true,'2018-02-01 15:05:33.375','Produtos de origem animal e serviços veterinários fiscalizados exclusivamente por fiscais da área de veterinária','19.02 Produtos de origem animal e serviços veterinários',107854,NULL,NULL,NULL),
+	 (227702,true,'2018-02-01 15:11:24.607','Produtos e serviços em saúde inspecionados exclusivamente por profissionais da área de enfermagem','20.04 Produtos e serviços em saúde - Enfermagem',108020,NULL,NULL,NULL),
+	 (227703,true,'2018-02-01 15:12:14.17','Produtos e serviços de interesse à saúde inspecionados exclusivamente por profissionais da área de enfermagem','20.09 Produtos e serviços de interesse à saúde - Enfermagem',108020,NULL,NULL,NULL);
+INSERT INTO grupodemanda (id,ativo,data_criacao,descricao,nome,grupo_id,usuarioalteracao,fundomunicipal_id,pontuacaorota) VALUES
+	 (259397,true,'2018-02-01 15:15:56.183','Produtos e serviços em saúde inspecionados exclusivamente por equipe mista da área de Enfermagem e Alimentos','20.10 Produtos e serviços de interesse à saúde - Enfermagem e Alimentos',108020,NULL,NULL,NULL),
+	 (355738,true,'2018-03-21 14:58:39.642','Fiscalização de obra que teve o Alvará de Construção cassado','9.1 Alvará de Construção',355737,NULL,NULL,NULL),
+	 (104242,true,'2017-10-24 14:27:15.821','Aterramento de corpo hídrico','4.8 Aterramento de corpo hídrico',15479,NULL,4,NULL),
+	 (146088,true,'2017-11-08 14:55:57.976','Intervenção ou obra executada em logradouro público sem o devido Alvará','2.5  Intervenção ou obra executada em logradouro público sem o devido Alvará',102749,NULL,NULL,NULL),
+	 (259346,true,'2018-02-01 14:58:07.233','Produtos e serviços em saúde inspecionados por profissionais de várias áreas compondo uma única equipe','20.07 Produtos e serviços em saúde - Equipe Multi',108020,NULL,NULL,NULL),
+	 (126291,true,'2018-02-01 14:58:57.32','Produtos de origem animal e serviços veterinários','18.02 - Produtos de origem animal e serviços veterinários',9,NULL,NULL,NULL),
+	 (256361,true,'2018-02-01 15:01:53.466','Produtos e serviços em saúde inspecionados por fiscais de múltiplas áreas compondo uma única equipe (ex: Postos de Saúde, ILPI e outros)','18.07 Produtos e serviços em saúde - Equipe Multi',9,NULL,NULL,NULL),
+	 (256478,true,'2018-02-01 15:08:07.134','Produtos e serviços em saúde que podem ser inspecionados por fiscais das áreas de Enfermagem ou Farmácia ou Odontologia','19.08 Produtos e serviços em saúde - Geral',107854,NULL,NULL,NULL),
+	 (227696,true,'2018-02-01 15:09:23.633','Produtos e serviços de interesse à saúde inspecionados exclusivamente por profissionais da área de enfermagem','19.09 Produtos e serviços de interesse à saúde - Enfermagem',107854,NULL,NULL,NULL),
+	 (107728,true,'2017-10-23 11:10:01.593','Comércio Ambulante, Feiras e permissionários - Denúncia','10.0 Comércio Ambulante, Feiras e permissionários - Denúncia',NULL,NULL,6,NULL);
+INSERT INTO grupodemanda (id,ativo,data_criacao,descricao,nome,grupo_id,usuarioalteracao,fundomunicipal_id,pontuacaorota) VALUES
+	 (227697,true,'2018-01-31 12:01:08.143',' Produtos químicos e relacionados','19.12  Produtos e serviços químicos ',107854,NULL,NULL,NULL),
+	 (16144,true,'2017-10-31 10:00:36.685','DEFESA DO CONSUMIDOR - DENUNCIA','11.0 Defesa do Consumidor - Denúncia',NULL,NULL,9,NULL),
+	 (126292,true,'2018-02-01 14:59:15.031','Produtos e serviços farmacêuticos','18.03  Produtos e serviços farmacêuticos',9,NULL,NULL,NULL),
+	 (256377,true,'2018-02-01 15:02:37.692','Produtos e serviços em saúde que podem ser inspecionados por fiscais das áreas de farmácia ou enfermagem ou odontologia.','18.08 Produtos e serviços em saúde - Geral',9,NULL,NULL,NULL),
+	 (256459,true,'2018-02-01 15:06:57.055','19.5 Produtos e serviços em saúde inspecionados exclusivamente por fiscais da área de Odontologia','19.05 Produtos e serviços em saúde - Odontologia',107854,NULL,NULL,NULL),
+	 (259393,true,'2018-02-01 15:13:19.428','Produtos e serviços em saúde que podem ser inspecionados por fiscais das áreas de Enfermagem ou Farmácia ou Odontologia','20.08 Produtos e serviços em saúde - Geral',108020,NULL,NULL,NULL),
+	 (107775,true,'2017-10-02 11:37:39.155','Defesa do Consumidor - Qualidade do produto','11.1 Defesa do Consumidor - Qualidade do produto',16144,NULL,9,NULL),
+	 (107776,true,'2017-10-02 11:38:01.361','Defesa do Consumidor - Qualidade do serviço','11.2 Defesa do Consumidor - Qualidade do serviço',16144,NULL,9,NULL),
+	 (107787,true,'2017-10-02 11:38:23.11','Defesa do Consumidor - Propaganda enganosa/abusiva','11.4 Defesa do Consumidor - Propaganda enganosa/abusiva',16144,NULL,9,NULL),
+	 (107795,true,'2017-10-02 11:38:49.573','Defesa do Consumidor - Comércio virtual','11.6 Defesa do Consumidor - Comércio virtual',16144,NULL,9,NULL);
+INSERT INTO grupodemanda (id,ativo,data_criacao,descricao,nome,grupo_id,usuarioalteracao,fundomunicipal_id,pontuacaorota) VALUES
+	 (107841,true,'2017-10-20 12:06:20.436','Vistoria/Inspeção prévias ao licenciamento','14.0 Vistoria/Inspeção prévias ao licenciamento',NULL,NULL,NULL,NULL),
+	 (107822,true,'2017-10-02 11:41:47.776','Patrimônio Histórico e Cultural – Outros bens protegidos','13.2 Patrimônio Histórico e Cultural – Outros bens protegidos',107818,NULL,10,NULL),
+	 (107849,true,'2017-10-20 12:19:44.925','Vistoria/Inspeção prévias ao licenciamento ambiental de Empreendimentos e Obras da construção civil','14.1 Vistoria/Inspeção prévia ao licenciamento ambiental da construção civil',107841,NULL,2,NULL),
+	 (256390,true,'2018-01-31 11:45:35.421','Produtos e serviços de interesse à saúde inspecionados exclusivamente por fiscais das áreas de Enfermagem e Alimentos','18.10 Produtos e serviços de interesse à saúde - Enfermagem e Alimentos',9,NULL,NULL,NULL),
+	 (227698,true,'2018-01-31 12:02:29.298','Produtos e serviços não relacionados à saúde não enquadrados nos demais grupos.','19.13 Produtos e serviços não relacionados à saúde',107854,NULL,NULL,NULL),
+	 (126293,true,'2018-02-01 14:59:57.163','Produtos e serviços em saúde inspecionados exclusivamente por profissionais da área de enfermagem','18.04 Produtos e serviços em saúde - Enfermagem',9,NULL,NULL,NULL),
+	 (227700,true,'2018-02-01 15:10:30.739','Produtos de origem animal e serviços veterinários inspecionados exclusivamente por profissionais da área de veterinária','20.02 Produtos de origem animal e serviços veterinários',108020,NULL,NULL,NULL),
+	 (259401,true,'2018-02-01 15:17:31.852','Produtos e serviços de interesse à saúde que podem ser inspecionados por fiscais das áreas de Enfermagem ou Farmácia ou Odontologia','20.11 Produtos e serviços de interesse à saúde - Geral',108020,NULL,NULL,NULL),
+	 (126296,true,'2018-01-31 11:25:13.712',' Produtos e serviços químicos','18.12 Produtos e serviços químicos',9,NULL,NULL,NULL),
+	 (256427,true,'2018-01-31 11:56:13.21','Produtos e serviços de interesse à saúde que podem ser fiscalizados pelas áreas de Enfermagem ou Farmácia ou Odontologia. (ex: Academia, Lavanderia e outros)','18.11 Produtos e serviços de interesse à saúde - Geral',9,NULL,NULL,NULL);
+INSERT INTO grupodemanda (id,ativo,data_criacao,descricao,nome,grupo_id,usuarioalteracao,fundomunicipal_id,pontuacaorota) VALUES
+	 (227699,true,'2018-02-01 15:09:57.617','Produtos e serviços alimentícios inspecionados exclusivamente por profissionais da área de alimentos','20.01 Produtos e serviços alimentícios',108020,NULL,NULL,NULL),
+	 (227701,true,'2018-02-01 15:11:08.666','Produtos e serviços farmacêuticos inspecionados exclusivamente por profissionais da área de farmácia','20.03 Produtos e serviços farmacêuticos',108020,NULL,NULL,NULL),
+	 (107732,true,'2017-10-23 11:44:54.641','Comércio Ambulante, Feiras e permissionários - Banca de revista','10.2 Comércio Ambulante, Feiras e permissionários - Banca de revista',107728,NULL,6,NULL),
+	 (107734,true,'2017-10-24 14:29:29.115','Comércio Ambulante, Feiras e permissionários - Box/mercado público','10.3 Comércio Ambulante, Feiras e permissionários - Box/mercado público',107728,NULL,6,NULL),
+	 (107779,true,'2020-04-01 15:25:44.042','Descumprimento do CDC (Outros).','11.3 Defesa do Consumidor - Negativa de direito ou descumprimento de obrigação ',16144,NULL,9,NULL),
+	 (108997,true,'2017-10-03 09:27:56.723','Monitoramento dos Termos de Compromisso','16.0 Monitoramento dos Termos de Compromisso',NULL,NULL,NULL,NULL),
+	 (109053,true,'2017-10-03 09:30:23.518','Ações Programadas','17.0 Ações Programadas',NULL,NULL,NULL,NULL),
+	 (109059,true,'2017-10-03 09:30:47.983','Ações Programadas - Operação','17.1 Ações Programadas - Operação',109053,NULL,NULL,NULL),
+	 (109069,true,'2017-10-03 09:31:14.6','Ações Programadas - Evento de Massa','17.2 Ações Programadas - Evento de Massa',109053,NULL,NULL,NULL),
+	 (109091,true,'2017-10-03 09:31:51.85','Ações Programadas - Busca Ativa','17.3 Ações Programadas - Busca Ativa',109053,NULL,NULL,NULL);
+INSERT INTO grupodemanda (id,ativo,data_criacao,descricao,nome,grupo_id,usuarioalteracao,fundomunicipal_id,pontuacaorota) VALUES
+	 (227704,true,'2018-02-01 14:48:14.108','Produtos e serviços químicos inspecionados exclusivamente por profissionais da área de química','20.12 Produtos e serviços químicos ',108020,NULL,NULL,NULL),
+	 (107754,true,'2017-10-23 11:50:18.519',' Comércio Ambulante, Feiras e permissionários - Food Bike','10.7 Comércio Ambulante, Feiras e permissionários - Food Bike',107728,NULL,6,NULL),
+	 (107757,true,'2017-10-23 11:52:21.684','Comércio Ambulante, Feiras e permissionários - Food Cart','10.8 Comércio Ambulante, Feiras e permissionários - Food Cart',107728,NULL,6,NULL),
+	 (107761,true,'2017-10-23 11:52:35.294','Comércio Ambulante, Feiras e permissionários - Outros','10.9 Comércio Ambulante, Feiras e permissionários - Outros',107728,NULL,6,NULL),
+	 (227705,true,'2018-02-08 13:33:35.177','Produtos e serviços que não se enquadrem nos outros grupos inspecionados por profissionais de qualquer especialidade
+','20.13 Produtos e serviços não relacionados à saúde',108020,NULL,NULL,NULL),
+	 (107853,true,'2017-10-20 12:20:32.394','Vistoria/Inspeção prévias ao licenciamento de Alvará de funcionamento','14.4 Vistoria/Inspeção prévias ao licenciamento de Alvará de funcionamento',107841,NULL,3,NULL),
+	 (107738,true,'2017-10-23 11:45:58.479','Comércio Ambulante, Feiras e permissionários - Feirante','10.4 Comércio Ambulante, Feiras e permissionários - Feirante',107728,NULL,6,NULL),
+	 (103167,true,'2017-10-25 11:11:49.658','Edificação em área particular','2.4 Edificação em área particular',102749,NULL,3,NULL),
+	 (107749,true,'2017-10-23 11:46:17.565','Comércio Ambulante, Feiras e permissionários - Food Truck','10.5 Comércio Ambulante, Feiras e permissionários - Food Truck',107728,NULL,6,NULL),
+	 (103186,true,'2017-10-20 12:14:55.069','Em áreas verdes','3.9 Posturas e práticas inadequadas em áreas verdes',103168,NULL,3,NULL);
+INSERT INTO grupodemanda (id,ativo,data_criacao,descricao,nome,grupo_id,usuarioalteracao,fundomunicipal_id,pontuacaorota) VALUES
+	 (103183,true,'2017-10-25 15:12:52.699','Posturas inadequadas em praças','3.7 Posturas e práticas inadequadas em praças',103168,NULL,3,NULL),
+	 (107751,true,'2017-10-23 11:46:40.343','10.6 Comércio Ambulante, Feiras e permissionários - Food Park','10.6 Comércio Ambulante, Feiras e permissionários - Food Park',107728,NULL,6,NULL),
+	 (103184,true,'2017-10-31 11:06:27.285','Em imóvel ocupado','3.8 Posturas e práticas inadequadas em imóvel ocupado',103168,NULL,3,NULL),
+	 (104236,true,'2017-10-24 14:25:57.286','Poluição causada a lagoa/lago','4.2 Poluição hídrica na lagoa/lago',15479,NULL,4,NULL),
+	 (103157,true,'2017-11-06 08:55:54.41','Obra/ocupação em área pública','2.3 Obra/ocupação em área pública',102749,NULL,3,NULL),
+	 (107804,true,'2017-10-03 10:55:18.894','Resíduos Sólidos de demolição','12.1 Resíduos Sólidos de demolição',7,NULL,7,NULL),
+	 (107806,true,'2017-10-03 10:55:32.571','Resíduos Sólidos de lixo comum','12.2 Resíduos Sólidos de lixo comum',7,NULL,7,NULL),
+	 (107809,true,'2017-10-03 10:55:44.947','Resíduos Sólidos de entulho de obra','12.3 Resíduos Sólidos de entulho de obra',7,NULL,7,NULL),
+	 (107815,true,'2017-10-03 10:55:58.959','Resíduos Sólidos de serviço de saúde','12.4 Resíduos Sólidos de serviço de saúde',7,NULL,7,NULL),
+	 (107817,true,'2017-10-03 10:56:13.74','Resíduos Sólidos de outros resíduos contaminantes ou perigosos','12.5 Resíduos Sólidos de outros resíduos contaminantes ou perigosos',7,NULL,7,NULL);
+INSERT INTO grupodemanda (id,ativo,data_criacao,descricao,nome,grupo_id,usuarioalteracao,fundomunicipal_id,pontuacaorota) VALUES
+	 (107818,true,'2017-10-02 11:33:44.941','Patrimônio Histórico e Cultural – Denúncia','13.0 Patrimônio Histórico e Cultural – Denúncia',NULL,NULL,10,NULL),
+	 (107820,true,'2017-10-02 11:41:31.151','Patrimônio Histórico e Cultural – Imóvel','13.1 Patrimônio Histórico e Cultural – Imóvel',107818,NULL,10,NULL),
+	 (108050,true,'2017-10-02 13:34:24.553','Vistoria/inspeção após o Licenciamento para Reparos Gerais','15.11 Vistoria/inspeção após o Licenciamento para Reparos Gerais',10652,NULL,3,NULL),
+	 (108053,true,'2017-10-02 13:40:35.97','Vistoria/inspeção após o Licenciamento de Autorização para Demolição','15.12 Vistoria/inspeção após o Licenciamento de Autorização para Demolição',10652,NULL,3,NULL),
+	 (108949,true,'2017-10-03 09:22:50.313','Vistoria/inspeção após o Licenciamento - Inspeção Predial','15.13 Vistoria/inspeção após o Licenciamento - Inspeção Predial',10652,NULL,3,NULL),
+	 (108950,true,'2017-10-03 09:23:28.806','Vistoria/inspeção após o Licenciamento de Supressão Vegetal','15.14 Vistoria/inspeção após o Licenciamento de Supressão Vegetal',10652,NULL,2,NULL),
+	 (108954,true,'2017-10-03 09:24:06.663','Vistoria/inspeção após o Licenciamento de Bem Tombado','15.15 Vistoria/inspeção após o Licenciamento de Bem Tombado',10652,NULL,10,NULL),
+	 (108958,true,'2017-10-03 09:24:39.897','Vistoria/inspeção após o Licenciamento de Loteamento','15.16 Vistoria/inspeção após o Licenciamento de Loteamento',10652,NULL,3,NULL),
+	 (108964,true,'2017-10-03 09:25:06.902','Vistoria/inspeção após o Licenciamento de PGRS','15.17 Vistoria/inspeção após o Licenciamento de PGRS',10652,NULL,7,NULL),
+	 (108965,true,'2017-10-03 09:25:34.315','Vistoria/inspeção após o Licenciamento de PGRSS','15.18 Vistoria/inspeção após o Licenciamento de PGRSS',10652,NULL,7,NULL);
+INSERT INTO grupodemanda (id,ativo,data_criacao,descricao,nome,grupo_id,usuarioalteracao,fundomunicipal_id,pontuacaorota) VALUES
+	 (256487,true,'2018-01-31 12:23:48.591','Produtos e serviços de interesse à saúde que podem ser inspecionados por fiscais das áreas de Enfermagem ou Farmácia ou Odontologia','19.11 Produtos e serviços de interesse à saúde - Geral',107854,NULL,NULL,NULL),
+	 (107729,true,'2017-10-23 11:45:23.701','Serviço de massagem, serviço de atividade física, venda de água de coco, venda de comidas diversas, venda de bebidas não alcoólicas, venda de bebidas alcoólicas','10.1 Comércio Ambulante ',107728,NULL,6,NULL),
+	 (256461,true,'2018-02-01 15:07:41.195','Produtos e serviços em saúde  inspecionados por fiscais de múltiplas áreas compondo uma única equipe','19.07 Produtos e serviços em saúde - Equipe Multi',107854,NULL,NULL,NULL),
+	 (102750,true,'2017-10-25 11:11:18.657','Obra em área particular','2.1 Obra em área particular',102749,NULL,3,NULL),
+	 (103173,true,'2017-10-20 12:13:50.695','Criação de animais','3.4 Posturas e práticas inadequadas criação de animais',103168,NULL,3,NULL),
+	 (103174,true,'2017-10-20 12:14:05.447','Em imóvel vazio / abandonado','3.5 Posturas e práticas inadequadas em imóvel vazio / abandonado',103168,NULL,3,NULL),
+	 (107851,true,'2017-10-20 12:20:02.648','Vistoria/Inspeção prévias ao licenciamento ambiental de atividades','14.2 Vistoria/Inspeção prévias ao licenciamento ambiental de atividades',107841,NULL,2,NULL),
+	 (107854,true,'2018-01-18 14:12:00','Vistoria/Inspeção prévias ao licenciamento sanitário','19.0 VISTORIA/INSPEÇÃO PRÉVIAS AO LICENCIAMENTO SANITÁRIO',NULL,NULL,8,NULL),
+	 (107852,true,'2017-10-20 12:20:17.109','Vistoria/Inspeção prévias ao licenciamento de habite-se','14.3 Vistoria/Inspeção prévias ao licenciamento de habite-se',107841,NULL,3,NULL),
+	 (108966,true,'2017-10-03 09:25:52.901','Vistoria/inspeção após o Licenciamento de PGRCC','15.19 Vistoria/inspeção após o Licenciamento de PGRCC',10652,NULL,7,NULL);
+INSERT INTO grupodemanda (id,ativo,data_criacao,descricao,nome,grupo_id,usuarioalteracao,fundomunicipal_id,pontuacaorota) VALUES
+	 (108019,true,'2017-10-02 13:14:10.233','Vistoria/inspeção após o Licenciamento de Alvará de Funcionamento','15.1 Vistoria/inspeção após o Licenciamento de Alvará de Funcionamento',10652,NULL,3,NULL),
+	 (108977,true,'2017-10-03 09:27:12.347','Vistoria/inspeção após o Licenciamento de Isenção de Plano de Gerenciamento de Resíduos','15.20 Vistoria/inspeção após o Licenciamento de Isenção de Plano de Gerenciamento de Resíduos',10652,NULL,7,NULL),
+	 (108026,true,'2017-10-02 13:16:52.379','Vistoria/inspeção após o Licenciamento Ambiental Regular de Obras','15.4 Vistoria/inspeção após o Licenciamento Ambiental de Obras',10652,NULL,2,NULL),
+	 (108028,true,'2017-10-02 13:19:53.682','Vistoria/inspeção após o Licenciamento - Isenção de Licença Ambiental','15.5 Vistoria/inspeção após o Licenciamento - Isenção de Licença Ambiental',10652,NULL,2,NULL),
+	 (108029,true,'2017-10-02 13:20:41.953','Vistoria/inspeção após o Licenciamento - AEUS','15.6 Vistoria/inspeção após o Licenciamento - AEUS',10652,NULL,5,NULL),
+	 (108039,true,'2017-10-02 13:29:27.407','Vistoria/inspeção após o Licenciamento  de Propaganda e Publicidade','15.7 Vistoria/inspeção após o Licenciamento  de Propaganda e Publicidade',10652,NULL,3,NULL),
+	 (109011,true,'2017-10-03 09:28:32.987','Monitoramento dos Termos de Compromisso Ambiental','16.1 Monitoramento dos Termos de Compromisso Ambiental',108997,NULL,2,NULL),
+	 (109027,true,'2017-10-03 09:29:10.263','Monitoramento dos Termos de Compromisso Patrimônio Histórico','16.2 Monitoramento dos Termos de Compromisso Patrimônio Histórico',108997,NULL,10,NULL),
+	 (109039,true,'2017-10-03 09:29:57.604','Monitoramento dos Termos de Compromisso de Controle Urbano','16.3 Monitoramento dos Termos de Compromisso de Controle Urbano',108997,NULL,3,NULL),
+	 (96217,true,'2017-09-28 09:38:13.806','Poluição Sonora verificada em obras','1.7 - Poluição Sonora em Obras',15472,NULL,5,NULL);
+INSERT INTO grupodemanda (id,ativo,data_criacao,descricao,nome,grupo_id,usuarioalteracao,fundomunicipal_id,pontuacaorota) VALUES
+	 (96218,true,'2017-10-05 13:42:15.29','Poluição Sonora ','1.8 - Poluição Sonora em outros locais',15472,NULL,5,NULL),
+	 (15479,true,'2017-10-23 16:56:40.972','POLUIÇÃO HÍDRICA','4.0 Poluição Hídrica - Denúncia',NULL,NULL,4,NULL),
+	 (107622,true,'2017-10-27 11:16:30.855','Maus tratos contra animais','8.1 Infração Ambiental de maus tratos contra animais',61881,NULL,2,NULL),
+	 (15474,true,'2017-12-01 10:48:58.757','POLUIÇÃO ATMOSFÉRICA','5.0 Poluição Atmosférica - Denúncia',NULL,NULL,2,NULL),
+	 (108047,true,'2018-02-15 13:49:15.317','Vistoria/inspeção após o Licenciamento  de Alvará de Construção - Processo Físico','15.9 Vistoria/inspeção após o Licenciamento  de Alvará de Construção - Processo Físico',10652,NULL,3,NULL),
+	 (61881,true,'2017-11-14 08:41:10.113','Infração Ambienta - Denúncia','8.0 Infração Ambiental - Denúncia',NULL,NULL,2,NULL),
+	 (103103,true,'2017-10-25 11:10:46.009','Obra/ocupação em área ambiental','2.2 Obra/ocupação em área ambiental',102749,NULL,3,NULL),
+	 (104235,true,'2017-10-24 14:25:41','Poluição causada a riachos e córregos','4.1 Poluição hídrica no riacho/ córrego',15479,NULL,4,NULL),
+	 (15481,true,'2017-10-02 10:39:07.139','POLUIÇÃO DO SOLO','6.0 Poluição do Solo - Denúncia',NULL,NULL,2,NULL),
+	 (107555,true,'2017-10-02 16:42:04.412',' Poluição do Solo em Área Verde','6.1 Poluição do Solo em Área Verde',15481,NULL,2,NULL);
+INSERT INTO grupodemanda (id,ativo,data_criacao,descricao,nome,grupo_id,usuarioalteracao,fundomunicipal_id,pontuacaorota) VALUES
+	 (107562,true,'2017-10-02 10:40:33.529','Poluição do Solo em Terreno Público','6.2 Poluição do Solo em Terreno Público',15481,NULL,2,NULL),
+	 (107571,true,'2017-10-02 16:56:56.056','Poluição do Solo em Terreno Particular','6.3 Poluição do Solo em Terreno Particular',15481,NULL,2,NULL),
+	 (15476,true,'2017-10-03 09:13:30.779','POLUIÇÃO VISUAL','7.0 Poluição Visual - Denúncia',NULL,NULL,2,NULL),
+	 (107611,true,'2017-10-03 10:32:09.079',' Engenho de publicidade em local proibido (árvore, poste, calçada)','7.1 Poluição Visual por engenho de publicidade em local proibido (árvore, poste, calçada)',15476,NULL,2,NULL),
+	 (107614,true,'2017-10-03 10:32:29.588','Estabelecimento sem licença de propaganda e publicidade','7.2 Poluição Visual por estabelecimento sem licença de propaganda e publicidade',15476,NULL,2,NULL),
+	 (104238,true,'2017-10-24 14:26:13.131','Poluição Hídrica no rio','4.3 Poluição hídrica no rio',15479,NULL,4,NULL),
+	 (104239,true,'2017-10-24 14:26:28.159','Poluição hídrica na praia','4.4 Poluição hídrica na praia',15479,NULL,4,NULL),
+	 (107632,true,'2017-10-27 11:16:56.442','Corte de árvores','8.2 Infração Ambiental por corte de árvores',61881,NULL,2,NULL),
+	 (107633,true,'2017-10-27 11:17:15.703','Infração Ambiental - Outros','8.3 Infração Ambiental - Outros',61881,NULL,2,NULL),
+	 (108022,true,'2017-12-18 10:49:58.453','Vistoria/inspeção após o Licenciamento Ambiental Regular de Atividade','15.3 Vistoria/inspeção após o Licenciamento Ambiental Regular de Atividade',10652,NULL,2,NULL);
+INSERT INTO grupodemanda (id,ativo,data_criacao,descricao,nome,grupo_id,usuarioalteracao,fundomunicipal_id,pontuacaorota) VALUES
+	 (108043,true,'2018-02-15 13:48:40.023','Vistoria/inspeção após o Licenciamento  de Alvará de Construção On Line','15.8 Vistoria/inspeção após o Licenciamento  de Alvará de Construção On Line',10652,NULL,3,NULL),
+	 (14188,true,'2017-10-04 08:57:53.275','BUSCA ATIVA PGRS (ROTINA)','# NÃO CADASTRAR NOVAS DEMANDAS AQUI  # BUSCA ATIVA PGRS (ROTINA) ESTÁ NO GRUPO 15',NULL,NULL,7,NULL),
+	 (114800,true,'2018-04-27 16:38:47.173','Poluição Atmosférica por poeira ou outros particulados','5.4 Poluição Atmosférica por poeira ou outros particulados',15474,NULL,2,NULL),
+	 (15652,true,'2017-10-04 09:04:13.34','MEIO AMBIENTE  - DENUNCIA ','# NÃO CADASTRAR NOVAS DEMANDAS AQUI  # MEIO AMBIENTE  ESCOLHA ITEM 8 OU ITENS DE POLUIÇÃO',NULL,NULL,2,NULL),
+	 (102749,true,'2020-02-18 11:31:02.878','Infrações relacionadas a Obras no Código da Cidade','2.0 Obras, edificações, intervenções e ocupações irregulares - Denúncia',NULL,NULL,3,NULL),
+	 (108020,true,'2018-01-18 14:16:00','Vistoria/inspeção após o Licenciamento de Licença Sanitária','20.0 VISTORIA/INSPEÇÃO APÓS O LICENCIAMENTO DE LICENÇA SANITÁRIA',NULL,NULL,8,NULL),
+	 (9,true,'2018-01-25 10:32:57.096','Vigilância sanitária - Denúncia','18.0 Vigilância Sanitária - Denúncia',NULL,NULL,8,NULL),
+	 (356783,true,'2018-04-27 16:38:37.312','Poluição Atmosférica por veículos','5.5 Poluição Atmosférica por veículos',15474,NULL,NULL,NULL),
+	 (107550,true,'2018-04-27 16:39:03.926','5.3 Poluição Atmosférica por químicos irritantes. (estabelecimentos, domicílios e via pública). O mal cheiro sem causa definida deve ser tratado como demanda de posturas.','5.3 Poluição Atmosférica por odor e cheiros fortes ou produtos químicos irritantes',15474,NULL,2,NULL),
+	 (107545,true,'2018-04-27 16:39:34.184','5.2 Poluição Atmosférica por fumaça (Estabelecimentos, Ambulantes, Domicílios, Via pública)','5.2 Poluição Atmosférica por fumaça (exceto de queimadas)',15474,NULL,2,NULL);
+INSERT INTO grupodemanda (id,ativo,data_criacao,descricao,nome,grupo_id,usuarioalteracao,fundomunicipal_id,pontuacaorota) VALUES
+	 (434600,true,'2018-04-27 16:40:10.581','5.1 Poluição Atmosférica por fumaça (queimadas)','5.1 Poluição Atmosférica por fumaça (queimadas)',15474,NULL,NULL,NULL),
+	 (1,true,'2018-07-10 10:40:53.701','Fiscalização de Obras e posturas urbanas quanto a sua regularidade e registro junto aos órgãos competentes.','2.1 Obra em área particular',102749,NULL,3,NULL),
+	 (1081671,true,'2019-01-16 08:56:40.432','Ações Programadas - Combate às Arboviroses','17.5 Ações Programadas - Combate às Arboviroses',109053,NULL,NULL,NULL),
+	 (1262244,true,'2019-03-27 12:08:16.128','Ações Programadas - Saúde do Trabalhador','17.6 Ações Programadas - Saúde do Trabalhador',109053,NULL,NULL,NULL),
+	 (2035864,true,'2019-10-29 11:55:47.703','Ações Programadas - Operação de Vigilância Sanitária','17.7 Ações Programadas - Operação de Vigilância Sanitária',109053,NULL,NULL,NULL),
+	 (107790,true,'2020-04-01 11:23:57.388','Práticas comerciais abusivas','11.5 Defesa do Consumidor - Práticas comerciais abusivas',16144,NULL,9,NULL),
+	 (1985639,true,'2021-09-28 12:47:16.228','Edificação sem CIP válido; não afixando o CIP em local visível aos usuários e agentes públicos; não foram executadas as medidas saneadoras no prazo definido pelo Laudo de Vistoria Técnica; obstrução ou impedimento à fiscalização referente ao CIP.','2.6 Edificação sem Certificado de Inspeção Predial ou Descumprindo Normas Específicas',102749,NULL,NULL,NULL),
+	 (2035865,true,'2024-01-24 15:20:00','INSTALAÇÃO DE TUBULAÇÕES E OUTRAS ESTRUTURAS NA REDE DE DRENAGEM SEM AUTORIZAÇÃO DA PREFEITURA DE FORTALEZA.','3.14 Interferências na rede de drenagem',103168,NULL,NULL,NULL),
+	 (2035866,true,'2024-01-25 16:08:00','AÇÕES PROGRAMADAS - COLETA DE AMOSTRAS PARA INVESTIGAÇÃO DE SURTO ALIMENTAR E OUTRAS DOENÇAS (EX. HAFF, ETC.) CAIXA DE ATIVIDADES: RESIDÊNCIA','17.8 AÇÕES PROGRAMADAS - COLETA DE AMOSTRAS PARA INVESTIGAÇÃO',NULL,NULL,NULL,NULL),
+	 (256328,true,'2018-02-01 15:01:00',' Produtos e serviços em saúde inspecionados exclusivamente por equipe mista da área de Enfermagem e Farmácia','18.06 PRODUTOS E SERVIÇOS EM SAÚDE - ENFERMAGEM, ODONTOLOGIA E FARMÁCIA',9,NULL,NULL,NULL);
+INSERT INTO grupodemanda (id,ativo,data_criacao,descricao,nome,grupo_id,usuarioalteracao,fundomunicipal_id,pontuacaorota) VALUES
+	 (256460,true,'2018-02-01 15:07:00',' Produtos e serviços em saúde inspecionados exclusivamente por fiscais das áreas de Enfermagem e Farmácia','19.06 PRODUTOS E SERVIÇOS EM SAÚDE - ENFERMAGEM, ODONTOLOGIA E FARMÁCIA',107854,NULL,NULL,NULL),
+	 (2035867,true,'2024-07-23 15:34:00','VERIFICAR A REGULARIDADE DOS SERVIÇOS E ATIVIDADES DE TURISMO NO MUNICÌPIO DE FORTALEZA','11.7 DEFESA DO CONSUMIDOR - ATIVIDADE DE TURISMO',NULL,NULL,NULL,NULL),
+	 (2035868,true,'2024-09-10 15:11:30.003','AUSÊNCIA DE PRECIFICAÇÃO (POR QUALQUER MODALIDADE DE AFIXAÇÃO DE PREÇO), VITRINES SEM PREÇO, AUSÊNCIA DE LEITOR ÓTICO OU EQUIPAMENTO COM DEFEITO, AUSÊNCIA DE PREÇO POR UNIDADE DE MEDIDA, ENTRE OUTROS.','11.8 - AUSÊNCIA DE PRECIFICAÇÃO DE PRODUTOS E SERVIÇOS',NULL,NULL,NULL,NULL);
