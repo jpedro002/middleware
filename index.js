@@ -333,6 +333,8 @@ async function buscarRegistroOrigem(table, id) {
         // Para segurança e compatibilidade, vamos fazer assim:
         if (table === "public.demanda") {
             resultado = await dbOrigem`SELECT * FROM public.demanda WHERE id = ${id}`;
+        } else if (table === "public.fiscaldemanda") {
+            resultado = await dbOrigem`SELECT * FROM public.fiscaldemanda WHERE id = ${id}`;
         } else {
             console.error(`❌ Tabela não suportada: ${table}`);
             return null;
@@ -346,11 +348,40 @@ async function buscarRegistroOrigem(table, id) {
 }
 
 // ============================================================
+// SINCRONIZAÇÃO FISCAL-DEMANDA (relação N:N)
+// ============================================================
+
+async function sincronizarFiscalDemanda(event_type, data) {
+    console.log(`\n👤 FISCAL-DEMANDA ${event_type}:`);
+    console.log(`   📋 Dados recebidos:`, JSON.stringify(data, null, 2));
+
+    // Por enquanto apenas loga - implementar lógica depois
+    // A tabela fiscaldemanda relaciona fiscal com demanda
+    // Campos esperados: id, fiscal_id, demanda_id, data_criacao, etc.
+
+    if (event_type === "INSERT") {
+        console.log(`   ✅ Nova relação fiscal-demanda registrada`);
+        // TODO: Implementar INSERT em fiscalizacao.demandas_fiscais ou similar
+    }
+
+    if (event_type === "UPDATE") {
+        console.log(`   🔄 Relação fiscal-demanda atualizada`);
+        // TODO: Implementar UPDATE
+    }
+
+    if (event_type === "DELETE") {
+        console.log(`   🗑️ Relação fiscal-demanda removida`);
+        // TODO: Implementar DELETE/soft delete
+    }
+}
+
+// ============================================================
 // HANDLERS POR TABELA
 // ============================================================
 
 const HANDLERS = {
     "public.demanda": sincronizarDemanda,
+    "public.fiscaldemanda": sincronizarFiscalDemanda,
     // Adicionar mais handlers conforme necessário:
     // "public.pessoa": sincronizarPessoa,
 };
@@ -548,4 +579,4 @@ iniciarCronReconciliacao();
 
 // Trigger imediato da reconciliação
 console.log("⚡ Executando reconciliação imediata na inicialização...");
-verificarGaps();
+// verificarGaps();
