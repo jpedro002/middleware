@@ -1,11 +1,13 @@
 {
   "name": "middleware",
-  "module": "index.js",
+  "module": "src/index.js",
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "bun run index.js",
-    "dev": "bun --watch run index.js"
+    "start": "bun run src/index.js",
+    "dev": "bun --watch run src/index.js",
+    "start:legacy": "bun run index.js",
+    "sync:fiscal-demanda": "bun run src/scripts/syncFiscalDemanda.js"
   },
   "devDependencies": {
     "@types/bun": "latest"
