@@ -1,0 +1,54 @@
+[
+  {
+    "nome": "TERMO_DE_ADVERTENCIA",
+    "pergunta": "termoAdvertenciaArtigoInfringido",
+    "resposta": "141 F"
+  },
+  {
+    "nome": "TERMO_DE_ADVERTENCIA",
+    "pergunta": "termoAdvertenciaPrazoConcedido",
+    "resposta": "10"
+  },
+  {
+    "nome": "TERMO_DE_INTERDICAO",
+    "pergunta": "termoInterdicao",
+    "resposta": "ESTABELECIMENTO_TOTAL"
+  },
+  {
+    "nome": "TERMO_DE_DESINTERDICAO",
+    "pergunta": "termoDesinterdicao",
+    "resposta": "ESTABELECIMENTO_TOTAL"
+  },
+  {
+    "nome": "TERMO_DE_APREENSAO",
+    "pergunta": "termoApreensao",
+    "resposta": "ALIMENTOS"
+  },
+  {
+    "nome": "TERMO_DE_EMBARGO",
+    "pergunta": "termoEmbargo",
+    "resposta": "OBRAS"
+  },
+  {
+    "nome": "TERMO_DE_DESFAZIMENTO",
+    "pergunta": "termoDesfazimento",
+    "resposta": "TESTE"
+  },
+  {
+    "nome": "TERMO_DE_DEMOLICAO",
+    "pergunta": "termoDemolicao",
+    "resposta": "TESTE"
+  },
+  {
+    "nome": "MULTA_DIARIA",
+    "pergunta": "multaDiaria",
+    "resposta": "R$ 500,00"
+  },
+  { "nome": "OUTROS", "pergunta": "quizOutros", "resposta": "TESTE DE TIPO" },
+  { "nome": "OUTROS", "pergunta": "quizOutrosAssunto", "resposta": "TESTE" },
+  {
+    "nome": "TERMO_DE_ADVERTENCIA",
+    "pergunta": "termoAdvertencia",
+    "resposta": "LEVE"
+  }
+]

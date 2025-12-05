@@ -1,0 +1,135 @@
+{
+  "logradouro": "RUA PAULO SETÚBAL",
+  "numero": "3",
+  "complemento": "",
+  "bairro": "MESSEJANA",
+  "latitude": "-3.820461299999999",
+  "longitude": "-38.49607049999999",
+  "fiscalId": 2866926,
+  "demandaAssociada": "2509257831421",
+  "demanda_id": 7831421,
+  "grupoDemanda": { "id": 95463 },
+  "gerefi": {
+    "nome": "GERÊNCIA DE PLANTÕES E ATIVIDADES ESPECIAIS - DIA",
+    "sigla": "GEPLAE/DIA",
+    "cor": "#729b6f",
+    "gerentes": [],
+    "id": 4,
+    "ativo": true,
+    "dataCriacao": "14/10/2022 15:57"
+  },
+  "descricao": "TESTE",
+  "numeroDocumentoFiscal": "123",
+  "serie": "M",
+  "dataConstatacao": "11/11/1111 11:11",
+
+  "confirmacaoExisteMedidaAdministrativa": "SIM",
+  "pessoa": { "id": -1 },
+  "criarAutoPessoaNaoInformada": true,
+  "tipoAuto": "INFRACAO",
+  "envioInfracaoAr": "true",
+  "cep": "60840-280",
+  "fundamentacaoLegal": "LEI COMPLEMENTAR MUNICIPAL 270/2019, ARTIGO 3.\n",
+  "textosLegais": [5209, 8613],
+  "tipoPrazoDefesa": "DIAS_UTEIS",
+  "diasPrazoDefesa": "10",
+  "diasPrazoAdvertencia": 0,
+  "medidaAdm": [
+    {
+      "nome": "TERMO_DE_ADVERTENCIA",
+      "pergunta": "termoAdvertenciaArtigoInfringido",
+      "resposta": "141 F",
+      "id": 32813,
+      "ativo": true,
+      "dataCriacao": "04/12/2025 11:19"
+    },
+    {
+      "nome": "TERMO_DE_ADVERTENCIA",
+      "pergunta": "termoAdvertenciaPrazoConcedido",
+      "resposta": "10",
+      "id": 32814,
+      "ativo": true,
+      "dataCriacao": "04/12/2025 11:19"
+    },
+    {
+      "nome": "TERMO_DE_INTERDICAO",
+      "pergunta": "termoInterdicao",
+      "resposta": "ESTABELECIMENTO_TOTAL",
+      "id": 32815,
+      "ativo": true,
+      "dataCriacao": "04/12/2025 11:19"
+    },
+    {
+      "nome": "TERMO_DE_DESINTERDICAO",
+      "pergunta": "termoDesinterdicao",
+      "resposta": "ESTABELECIMENTO_TOTAL",
+      "id": 32816,
+      "ativo": true,
+      "dataCriacao": "04/12/2025 11:19"
+    },
+    {
+      "nome": "TERMO_DE_APREENSAO",
+      "pergunta": "termoApreensao",
+      "resposta": "ALIMENTOS",
+      "id": 32817,
+      "ativo": true,
+      "dataCriacao": "04/12/2025 11:19"
+    },
+    {
+      "nome": "TERMO_DE_EMBARGO",
+      "pergunta": "termoEmbargo",
+      "resposta": "OBRAS",
+      "id": 32818,
+      "ativo": true,
+      "dataCriacao": "04/12/2025 11:19"
+    },
+    {
+      "nome": "TERMO_DE_DESFAZIMENTO",
+      "pergunta": "termoDesfazimento",
+      "resposta": "TESTE",
+      "id": 32819,
+      "ativo": true,
+      "dataCriacao": "04/12/2025 11:19"
+    },
+    {
+      "nome": "TERMO_DE_DEMOLICAO",
+      "pergunta": "termoDemolicao",
+      "resposta": "TESTE",
+      "id": 32820,
+      "ativo": true,
+      "dataCriacao": "04/12/2025 11:19"
+    },
+    {
+      "nome": "MULTA_DIARIA",
+      "pergunta": "multaDiaria",
+      "resposta": "R$ 500,00",
+      "id": 32821,
+      "ativo": true,
+      "dataCriacao": "04/12/2025 11:19"
+    },
+    {
+      "nome": "OUTROS",
+      "pergunta": "quizOutros",
+      "resposta": "TESTE DE TIPO",
+      "id": 32822,
+      "ativo": true,
+      "dataCriacao": "04/12/2025 11:19"
+    },
+    {
+      "nome": "OUTROS",
+      "pergunta": "quizOutrosAssunto",
+      "resposta": "TESTE",
+      "id": 32823,
+      "ativo": true,
+      "dataCriacao": "04/12/2025 11:19"
+    },
+    {
+      "nome": "TERMO_DE_ADVERTENCIA",
+      "pergunta": "termoAdvertencia",
+      "resposta": "LEVE",
+      "id": 32824,
+      "ativo": true,
+      "dataCriacao": "04/12/2025 11:19"
+    }
+  ]
+}
